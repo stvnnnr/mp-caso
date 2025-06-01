@@ -1,17 +1,16 @@
--- 1. Creamos la base
 CREATE DATABASE MP_CasosDB;
 GO
 USE MP_CasosDB;
 GO
 
--- 2. Crear tabla Fiscalías
+-- 2. Tabla Fiscalías
 CREATE TABLE Fiscalías (
   FiscalíaID INT PRIMARY KEY IDENTITY(1,1),
   NombreFiscalía VARCHAR(200) NOT NULL
 );
 GO
 
--- 3. Crear tabla Fiscales
+-- 3. Tabla Fiscales
 CREATE TABLE Fiscales (
   FiscalID INT PRIMARY KEY IDENTITY(1,1),
   Nombre VARCHAR(200) NOT NULL,
@@ -23,7 +22,7 @@ CREATE TABLE Fiscales (
 );
 GO
 
--- 4. Crear tabla Casos
+-- 4. Tabla Casos
 CREATE TABLE Casos (
   CasoID INT PRIMARY KEY IDENTITY(1,1),
   Descripcion VARCHAR(500) NOT NULL,
@@ -38,7 +37,7 @@ CREATE TABLE Casos (
 );
 GO
 
--- 5. Crear tabla LogReasignaciones
+-- 5. Tabla LogReasignaciones (CORREGIDA)
 CREATE TABLE LogReasignaciones (
   LogID INT PRIMARY KEY IDENTITY(1,1),
   CasoID INT NOT NULL,
@@ -53,24 +52,19 @@ CREATE TABLE LogReasignaciones (
   CONSTRAINT FK_Log_FiscalAnterior FOREIGN KEY (FiscalAnterior)
     REFERENCES Fiscales(FiscalID)
     ON DELETE NO ACTION
-    ON UPDATE CASCADE,
+    ON UPDATE NO ACTION,  -- Corregido
   CONSTRAINT FK_Log_FiscalIntentado FOREIGN KEY (FiscalIntentado)
     REFERENCES Fiscales(FiscalID)
     ON DELETE NO ACTION
-    ON UPDATE CASCADE
+    ON UPDATE NO ACTION   -- Corregido
 );
 GO
 
-
+-- Inserciones de ejemplo (ahora funcionarán)
 INSERT INTO Fiscalías (NombreFiscalía) VALUES ('Fiscalía General');
-GO
 INSERT INTO Fiscalías (NombreFiscalía) VALUES ('Fiscalía Interina');
-GO
 INSERT INTO Fiscalías (NombreFiscalía) VALUES ('Fiscalía Departamental');
-GO
 INSERT INTO Fiscales (Nombre, FiscalíaID) VALUES ('María López', 1);
-GO
 INSERT INTO Fiscales (Nombre, FiscalíaID) VALUES ('Juan Ortega', 2);
-GO
 INSERT INTO Fiscales (Nombre, FiscalíaID) VALUES ('Walter Orozco', 3);
 GO
