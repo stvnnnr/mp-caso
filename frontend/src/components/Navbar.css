@@ -1,0 +1,55 @@
+/* src/components/Navbar.css */
+
+/* Contenedor principal de la navbar */
+.navbar {
+  background-color: var(--mp-azul-oscuro);
+  /* Asegurarse de que la navbar quede fija en la parte superior si lo deseas (opcional):
+     position: sticky;
+     top: 0;
+     z-index: 100;
+  */
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Inner wrapper para centrar el contenido y limitar ancho */
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;        /* Altura fija similar al portal */
+  padding: 0 20px;     /* Espacio a los lados */
+}
+
+/* Marca a la izquierda (logo textual) */
+.navbar-brand {
+  color: var(--mp-blanco);
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Lista de enlaces */
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+/* Cada enlace */
+.nav-list li a {
+  color: var(--mp-blanco);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 8px 0;
+  transition: color 0.2s ease-in-out;
+}
+
+/* Hover en los enlaces */
+.nav-list li a:hover {
+  color: var(--mp-azul-claro);
+  text-decoration: none;
+}
+
