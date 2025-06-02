@@ -1,0 +1,195 @@
+{
+	"info": {
+		"_postman_id": "b95c813b-c918-45ec-a95d-f5b25735ee19",
+		"name": "PruebaMP",
+		"description": "Documentación de la API para el sistema de gestión de casos del Ministerio Público.\n\n**Base URL:** `http://localhost:4000/api`\n\n## Códigos de Estado HTTP\n\n- `200 OK`: Solicitud exitosa\n    \n- `201 Created`: Recurso creado correctamente\n    \n- `400 Bad Request`: Error en los parámetros enviados\n    \n- `404 Not Found`: Recurso no encontrado\n    \n- `500 Internal Server Error`: Error interno del servidor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15419595",
+		"_collection_link": "https://bold-crescent-282445.postman.co/workspace/c39a81fc-bfa7-4e58-84fd-e1cf9065daaa/collection/15419595-b95c813b-c918-45ec-a95d-f5b25735ee19?action=share&source=collection_link&creator=15419595"
+	},
+	"item": [
+		{
+			"name": "Registrar un nuevo caso",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"descripcion\": \"Robo en edificio X\",\r\n  \"fiscalAsignado\": 1,\r\n  \"estado\": \"PENDIENTE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/casos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"casos"
+					]
+				},
+				"description": "### 1\\. Registrar un nuevo caso\n\nCrea un nuevo caso en el sistema.\n\n**Endpoint:** `POST /casos`\n\n**Headers:**\n\n- Content-Type: application/json\n    \n\n**Body (JSON):**\n\n``` json\n{\n  \"descripcion\": \"Robo en edificio X\",\n  \"fiscalAsignado\": 1,\n  \"estado\": \"PENDIENTE\"\n}\n\n ```\n\n**Parámetros del body:**\n\n- `descripcion` (string, requerido): Descripción del caso\n    \n- `fiscalAsignado` (number, requerido): ID del fiscal asignado al caso\n    \n- `estado` (string, requerido): Estado inicial del caso\n    \n\n**Respuesta esperada:**\n\n- Status: 201 Created\n    \n- Retorna el caso creado con su ID asignado"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todos los casos",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/casos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"casos"
+					]
+				},
+				"description": "### 2\\. Obtener todos los casos\n\nObtiene la lista completa de todos los casos registrados en el sistema.\n\n**Endpoint:** `GET /casos`\n\n**Parámetros:** Ninguno\n\n**Respuesta esperada:**\n\n- Status: 200 OK\n    \n- Retorna un array con todos los casos del sistema"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todos los casos por estado",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/casos?estado=PENDIENTE",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"casos"
+					],
+					"query": [
+						{
+							"key": "estado",
+							"value": "PENDIENTE"
+						}
+					]
+				},
+				"description": "### 3\\. Obtener casos por estado\n\nFiltra y obtiene los casos según su estado específico.\n\n**Endpoint:** `GET /casos?estado={estado}`\n\n**Query Parameters:**\n\n- `estado` (string, requerido): Estado por el cual filtrar los casos\n    - Valores posibles: `PENDIENTE`, `EN_PROCESO`, `RESUELTO`, `CERRADO`\n        \n\n**Ejemplo:**\n\n```\nGET /casos?estado=PENDIENTE\n\n ```\n\n**Respuesta esperada:**\n\n- Status: 200 OK\n    \n- Retorna un array con los casos que coinciden con el estado especificado"
+			},
+			"response": []
+		},
+		{
+			"name": "Reasignar un caso a otro fiscal",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nuevoFiscal\": 2,\r\n  \"nuevaFiscalia\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/casos/1/reasignar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"casos",
+						"1",
+						"reasignar"
+					]
+				},
+				"description": "### 4\\. Reasignar un caso a otro fiscal\n\nPermite reasignar un caso existente a un nuevo fiscal y/o fiscalía.\n\n**Endpoint:** `PUT /casos/{id}/reasignar`\n\n**Path Parameters:**\n\n- `id` (number, requerido): ID del caso a reasignar\n    \n\n**Headers:**\n\n- Content-Type: application/json\n    \n\n**Body (JSON):**\n\n``` json\n{\n  \"nuevoFiscal\": 2,\n  \"nuevaFiscalia\": 1\n}\n\n ```\n\n**Parámetros del body:**\n\n- `nuevoFiscal` (number, requerido): ID del nuevo fiscal asignado\n    \n- `nuevaFiscalia` (number, requerido): ID de la nueva fiscalía asignada\n    \n\n**Respuesta esperada:**\n\n- Status: 200 OK\n    \n- Retorna el caso actualizado con la nueva asignación"
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar el estado de un caso",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nuevoEstado\": \"RESUELTO\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/casos/1/estado",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"casos",
+						"1",
+						"estado"
+					]
+				},
+				"description": "### 5\\. Actualizar el estado de un caso\n\nModifica el estado de un caso específico.\n\n**Endpoint:** `PUT /casos/{id}/estado`\n\n**Path Parameters:**\n\n- `id` (number, requerido): ID del caso a actualizar\n    \n\n**Headers:**\n\n- Content-Type: application/json\n    \n\n**Body (JSON):**\n\n``` json\n{\n  \"nuevoEstado\": \"RESUELTO\"\n}\n\n ```\n\n**Parámetros del body:**\n\n- `nuevoEstado` (string, requerido): Nuevo estado del caso\n    - Valores posibles: `PENDIENTE`, `EN_PROCESO`, `RESUELTO`, `CERRADO`\n        \n\n**Respuesta esperada:**\n\n- Status: 200 OK\n    \n- Retorna el caso actualizado con el nuevo estado"
+			},
+			"response": []
+		},
+		{
+			"name": " Generar informe estadístico de casos (conteo por estado)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/casos/informes/estadisticas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"casos",
+						"informes",
+						"estadisticas"
+					]
+				},
+				"description": "### 6\\. Generar informe estadístico de casos\n\nObtiene un informe estadístico con el conteo de casos agrupados por estado.\n\n**Endpoint:** `GET /casos/informes/estadisticas`\n\n**Parámetros:** Ninguno\n\n**Respuesta esperada:**\n\n- Status: 200 OK\n    \n- Retorna un objeto con estadísticas de casos por estado\n    \n\n**Ejemplo de respuesta:**\n\n``` json\n{\n  \"PENDIENTE\": 15,\n  \"EN_PROCESO\": 8,\n  \"RESUELTO\": 23,\n  \"CERRADO\": 5\n}\n\n ```"
+			},
+			"response": []
+		}
+	]
+}
