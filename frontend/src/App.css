@@ -1,0 +1,93 @@
+/* src/App.css */
+
+:root {
+  /* Variables globales de colores */
+  --mp-azul-oscuro: #004368;
+  --mp-azul-claro: #006BB3;
+  --mp-texto: #212121;
+  --mp-blanco: #FFFFFF;
+  --mp-gris-claro: #F5F5F5;
+}
+
+/* Contenedor principal de la App */
+.App {
+  text-align: center;
+}
+
+/* Estilo del contenedor que envuelve cada página / sección */
+.container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: var(--mp-blanco); /* Blanco puro */
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos */
+h1, h2, h3 {
+  margin-bottom: 16px;
+  color: var(--mp-azul-oscuro);
+}
+
+/* Formularios: inputs, selects, buttons */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+input, select, button, textarea {
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Botones primarios usando azul MP */
+button {
+  cursor: pointer;
+  background-color: var(--mp-azul-oscuro);
+  color: var(--mp-blanco);
+  border: none;
+  font-weight: bold;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: var(--mp-azul-claro);
+}
+
+/* Mensajes de error / éxito */
+.error {
+  color: #D32F2F; /* Rojo para errores */
+  font-size: 0.9rem;
+}
+
+.success {
+  color: #2E7D32; /* Verde para éxito */
+  font-size: 0.9rem;
+}
+
+/* Tablas de lista de casos y estadísticas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  padding: 12px 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: var(--mp-azul-oscuro);
+  color: var(--mp-blanco);
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
